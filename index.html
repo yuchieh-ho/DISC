@@ -170,7 +170,9 @@
 
 <div class="container">
     <h1>辨識你的 DISC 人格類型（出處白金定律）</h1>
-    
+    <p style="text-align: center; color: #666; margin-bottom: 20px;">親愛的臨床教師與新進護理師您好：</p>
+    <p style="text-align: center; color: #666; margin-bottom: 20px;">本性格測驗旨在協助臨床教師與學員彼此了解在互動、溝通與學習上的性格傾向，作為未來教學與合作的參考依據。</p>
+    <p style="text-align: center; color: #666; margin-bottom: 20px;">本測驗沒有對錯，也不做能力評價，請您依照第一直覺作答，選擇最符合您「平時真實狀況」的選項即可。</p>
     <div class="info-section">
         <div class="info-group">
             <label for="user-role">身份選擇</label>
@@ -179,6 +181,11 @@
                 <option value="老師">老師</option>
                 <option value="學生">學生</option>
             </select>
+        </div>
+	
+	<div class="info-group">
+            <label for="user-id">姓名</label>
+            <input type="text" id="user-id" placeholder="請輸入您的姓名">
         </div>
 
         <div class="info-group">
@@ -213,11 +220,17 @@
                 <option value="PICU">PICU</option>
                 <option value="OPD">OPD</option>
                 <option value="ER">ER</option>
+		<option value="OR">PICU</option>
+                <option value="POR">OPD</option>
+                <option value="CSR">ER</option>
             </select>
         </div>
     </div>
 
-    <p style="text-align: center; color: #666; margin-bottom: 20px;">請依照您的直覺，選擇每一題最符合您的狀況。</p>
+    <p style="text-align: center; color: #666; margin-bottom: 20px;">【填答說明（請務必閱讀）】</p>
+    <p style="text-align: center; color: #666; margin-bottom: 20px;">• 每一題都包含 A 與 B 兩種不同描述</p>
+    <p style="text-align: center; color: #666; margin-bottom: 20px;">• 請只選擇一個選項，代表您較接近哪一種描述</p>
+    <p style="text-align: center; color: #666; margin-bottom: 20px;">• 每題共有 4 個選項，請依「符合程度」選擇其一</p>
     
     <form id="quizForm">
         <div id="questions-container"></div>
