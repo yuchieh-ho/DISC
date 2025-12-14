@@ -53,46 +53,66 @@
             box-sizing: border-box;
         }
 
-        /* --- 題目區塊 --- */
+        /* --- 題目區塊樣式調整 --- */
         .question-block {
-            margin-bottom: 25px;
-            padding-bottom: 15px;
+            margin-bottom: 30px; /* 增加間距 */
+            padding-bottom: 20px;
             border-bottom: 1px solid #eee;
         }
         .question-title {
             font-weight: bold;
-            margin-bottom: 10px;
-            color: #555;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #333;
+            background-color: #eaeaea; /* 標題加一點底色 */
+            padding: 8px 12px;
+            border-radius: 5px;
+            display: inline-block;
         }
+        
+        /* 新增：題目敘述區塊 (A與B的文字) */
+        .question-description {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 5px solid #6c757d; /* 左側裝飾線 */
+        }
+        .desc-item {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+            line-height: 1.5;
+            color: #444;
+        }
+        .desc-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 選項區塊 */
         .options-container {
             display: flex;
             flex-direction: column;
             gap: 10px;
+            padding-left: 10px; /* 稍微縮排 */
         }
         .option-label {
             display: flex;
             align-items: center;
             cursor: pointer;
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #ddd;
             border-radius: 5px;
             transition: background 0.2s;
         }
         .option-label:hover {
-            background-color: #f9f9f9;
+            background-color: #f0f8ff; /* 滑鼠移過去變淡藍色 */
+            border-color: #b3d7ff;
         }
         .option-label input {
-            margin-right: 10px;
+            margin-right: 15px;
+            transform: scale(1.2); /* 讓圈圈大一點比較好按 */
         }
-        .score-desc {
-            font-size: 0.85em;
-            color: #666;
-            margin-left: auto;
-            background: #eee;
-            padding: 2px 6px;
-            border-radius: 4px;
-            white-space: nowrap;
-        }
+        
         .text-a { color: #d9534f; font-weight: bold; }
         .text-b { color: #0275d8; font-weight: bold; }
 
@@ -121,7 +141,6 @@
             display: none;
         }
         
-        /* 新增：最終判定類型的大標題樣式 */
         .final-type-box {
             text-align: center;
             background: #fff;
@@ -159,20 +178,18 @@
             border-bottom: 1px dashed #ccc;
             padding-bottom: 5px;
         }
-        /* 高亮顯示最高分的項目 */
-        .highlight-score {
-            color: #d9534f;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h1>辨識你的 DISC 人格類型（出處白金定律）</h1>
-    <p style="text-align: center; color: #666; margin-bottom: 20px;">親愛的臨床教師與新進護理師您好：</p>
-    <p style="text-align: center; color: #666; margin-bottom: 20px;">本性格測驗旨在協助臨床教師與學員彼此了解在互動、溝通與學習上的性格傾向，作為未來教學與合作的參考依據。</p>
-    <p style="text-align: center; color: #666; margin-bottom: 20px;">本測驗沒有對錯，也不做能力評價，請您依照第一直覺作答，選擇最符合您「平時真實狀況」的選項即可。</p>
+    <p style="color: #666; margin-bottom: 20px;">
+        親愛的臨床教師與新進護理師您好：<br>
+        本性格測驗協助臨床教師與學員彼此了解在互動、溝通與學習上的性格傾向，作為未來教學與合作的參考依據。<br>
+	本測驗沒有對錯，也不做能力評價，請您依照第一直覺作答，選擇最符合您「平時真實狀況」的選項即可。
+    </p>
+
     <div class="info-section">
         <div class="info-group">
             <label for="user-role">身份選擇</label>
@@ -182,10 +199,10 @@
                 <option value="學生">學生</option>
             </select>
         </div>
-	
-	<div class="info-group">
-            <label for="user-id">姓名</label>
-            <input type="text" id="user-id" placeholder="請輸入您的姓名">
+        
+        <div class="info-group">
+            <label for="user-name">姓名</label>
+            <input type="text" id="user-name" placeholder="請輸入您的姓名">
         </div>
 
         <div class="info-group">
@@ -220,17 +237,27 @@
                 <option value="PICU">PICU</option>
                 <option value="OPD">OPD</option>
                 <option value="ER">ER</option>
-		<option value="OR">PICU</option>
-                <option value="POR">OPD</option>
-                <option value="CSR">ER</option>
+                <option value="OR">OR</option>
+                <option value="POR">POR</option>
+                <option value="CSR">CSR</option>
             </select>
         </div>
-    </div>
+    </div> 
 
-    <p style="text-align: center; color: #666; margin-bottom: 20px;">【填答說明（請務必閱讀）】</p>
-    <p style="text-align: center; color: #666; margin-bottom: 20px;">• 每一題都包含 A 與 B 兩種不同描述</p>
-    <p style="text-align: center; color: #666; margin-bottom: 20px;">• 請只選擇一個選項，代表您較接近哪一種描述</p>
-    <p style="text-align: center; color: #666; margin-bottom: 20px;">• 每題共有 4 個選項，請依「符合程度」選擇其一</p>
+    <p style="color: #666; margin-bottom: 20px;">
+        【填答說明（請務必閱讀）】<br>
+        • 每一題都包含 A 與 B 兩種不同描述<br>
+        • 請只選擇一個選項，代表您較接近哪一種描述<br>
+        • 每題共有 4 個選項，請依「符合程度」選擇其一
+    </p>
+
+    <p style="color: #666; margin-bottom: 20px;">
+        【選項說明（請務必閱讀）】<br>
+        • 完全符合 A：A 的描述非常符合我<br>
+        • 比較符合 A：A 的描述大致符合我<br>
+        • 完全符合 B：B 的描述非常符合我<br>
+        • 比較符合 B：B 的描述大致符合我
+    </p>
     
     <form id="quizForm">
         <div id="questions-container"></div>
@@ -245,6 +272,7 @@
 
         <div class="user-result-summary">
             <strong>身份：</strong><span id="res-role"></span><br>
+            <strong>姓名：</strong><span id="res-name"></span><br>
             <strong>編號：</strong><span id="res-id"></span><br>
             <strong>單位：</strong><span id="res-unit"></span>
         </div>
@@ -267,14 +295,14 @@
         { A: "與他人交談時，我通常把談話的焦點放在對方身上，雖然有時與原來的主題不甚相關，我也不以為意。", B: "與他人交談時，我通常把談話的主題，放在工作、議題或其他事物上" },
         { A: "我通常有點猶豫不決，而且對緩慢的節奏有耐心。", B: "我通常十分果決，而且對緩慢的節奏沒什麼耐性。" },
         { A: "我通常依事實或證據來決定事情。", B: "我通常靠感覺或經驗來決定事情。" },
-        { A: "我喜歡參與團體討論。", B: "我不喜歡參與團體討論" },
+        { A: "我喜歡參與團體討論。", B: "我不喜歡參與團體討論" },
         { A: "我通常願意和別人共識，並在可能時提供協助。", B: "我通常喜歡獨立完成一項工作，即使是團隊的工作，我也希望自己完成自己的部分。" },
         { A: "我通常會問問題，或是試探性、委婉地發表意見。", B: "我通常會做出直接了當地陳述，或直接表達出我的意見。" },
         { A: "我主要著重在生意、觀念及成果上。", B: "我主要著重在人、互動及感覺上。" },
         { A: "我使用手勢、臉部表情或抑揚頓挫，來強調我說話的重點。", B: "我不使用手勢、臉部表情或抑揚頓挫，來強調我說話的重點。" },
-        { A: "我通常會接受別人的觀點（包括主意、感覺及顧慮）。", B: "我通常不會接受別人的觀點（包括主意、感覺及顧慮）。" },
+        { A: "我通常會接受別人的觀點（包括主意、感覺及顧慮）。", B: "我通常不會接受別人的觀點（包括主意、感覺及顧慮）。" },
         { A: "我通常只在審慎評估後及可預測的情況下，才會冒險及做出改變。", B: "我通常會在充滿活力及未知的狀況下，勇於冒險並做出改變。" },
-        { A: "我通常會保有個人的感覺及看法，只有在我願意時，才會與人分享。", B: "我常將與別人分享及討論我的感覺，視為輕鬆自在的事。" },
+        { A: "我通常會保有個人的感覺及看法，只有在我願意時，才會與人分享。", B: "我常將與別人分享及討論我的感覺，視為輕鬆自在的事。" },
         { A: "我通常常會尋求嶄新或不同的經驗及狀況。", B: "我通常會選擇已知或熟稔的狀況。" },
         { A: "對別人提出的議題、興趣及關心的事物，我通常會有所反應。", B: "我只對自己的議題、興趣及關心的事物有興趣。" },
         { A: "我對別人和我之間人際關係的衝突反應，是緩慢而且不直接的。", B: "我對別人和我之間人際關係的衝突反應，是迅速而且直接的。" }
@@ -285,42 +313,35 @@
 
     questions.forEach((q, index) => {
         const n = index + 1;
+        // 修改這裡的 HTML 結構，將敘述文字移到選項上方
         const html = `
             <div class="question-block">
                 <div class="question-title">第 ${n} 題</div>
+                
+                <div class="question-description">
+                    <div class="desc-item"><span class="text-a">A：</span>${q.A}</div>
+                    <div class="desc-item"><span class="text-b">B：</span>${q.B}</div>
+                </div>
+
                 <div class="options-container">
                     <label class="option-label">
                         <input type="radio" name="q${n}" value="3">
-                        <div>
-                            <span class="text-a">完全符合 A</span>：${q.A} <br>
-                            <span style="color:#ccc; font-size:0.8em;">(完全不符合 B)</span>
-                        </div>
-                        <span class="score-desc">A:3 / B:0</span>
+                        <div><span class="text-a">完全符合 A</span></div>
                     </label>
 
                     <label class="option-label">
                         <input type="radio" name="q${n}" value="2">
-                        <div>
-                            <span class="text-a">比較符合 A</span>：${q.A}
-                        </div>
-                        <span class="score-desc">A:2 / B:1</span>
+                        <div><span class="text-a">比較符合 A</span></div>
                     </label>
 
                     <label class="option-label">
                         <input type="radio" name="q${n}" value="1">
-                        <div>
-                            <span class="text-b">比較符合 B</span>：${q.B}
-                        </div>
-                        <span class="score-desc">A:1 / B:2</span>
+                        <div><span class="text-b">比較符合 B</span></div>
                     </label>
 
                     <label class="option-label">
                         <input type="radio" name="q${n}" value="0">
-                        <div>
-                            <span class="text-b">完全符合 B</span>：${q.B} <br>
-                            <span style="color:#ccc; font-size:0.8em;">(完全不符合 A)</span>
-                        </div>
-                        <span class="score-desc">A:0 / B:3</span>
+                        <div><span class="text-b">完全符合 B</span></div>
                     </label>
                 </div>
             </div>
@@ -331,10 +352,12 @@
     // --- 3. 計算邏輯 ---
     function calculateResult() {
         const userRole = document.getElementById('user-role').value;
+        const userName = document.getElementById('user-name').value.trim();
         const userId = document.getElementById('user-id').value.trim();
         const userUnit = document.getElementById('user-unit').value;
 
         if (!userRole) { alert("請選擇「身份」"); document.getElementById('user-role').focus(); return; }
+        if (!userName) { alert("請輸入「姓名」"); document.getElementById('user-name').focus(); return; }
         if (!userId) { alert("請輸入「員工編號」"); document.getElementById('user-id').focus(); return; }
         if (!userUnit) { alert("請選擇「所屬單位」"); document.getElementById('user-unit').focus(); return; }
 
@@ -365,19 +388,16 @@
             return;
         }
 
-        // --- 結果顯示設定 ---
         document.getElementById('res-role').innerText = userRole;
+        document.getElementById('res-name').innerText = userName;
         document.getElementById('res-id').innerText = userId;
         document.getElementById('res-unit').innerText = userUnit;
 
-        // 填入分數
         document.getElementById('score-O').innerText = O;
         document.getElementById('score-G').innerText = G;
         document.getElementById('score-D').innerText = D;
         document.getElementById('score-I').innerText = I;
 
-        // --- 新增：分類判定邏輯 ---
-        // 1. 將分數放入陣列並排序
         let scores = [
             { type: 'O', val: O },
             { type: 'G', val: G },
@@ -385,20 +405,14 @@
             { type: 'I', val: I }
         ];
 
-        // 依照分數由大到小排序 (如果分數相同，保持原本順序)
         scores.sort((a, b) => b.val - a.val);
 
-        // 取出前兩名
         let top1 = scores[0].type;
         let top2 = scores[1].type;
         
-        // 用一個簡單的檢查函數來確認是否包含某個字母
         const has = (type) => (top1 === type || top2 === type);
 
         let finalType = "";
-        
-        // 依照您的規則進行匹配
-        // 規則：G,D最高 -> D類型 | O,D最高 -> I類型 | O,I最高 -> S類型 | G,I最高 -> C類型
         
         if (has('G') && has('D')) {
             finalType = "老虎 D 支配型";
@@ -409,26 +423,23 @@
         } else if (has('G') && has('I')) {
             finalType = "貓頭鷹 C 分析型";
         } else {
-            // 處理未定義的組合 (O+G 或 D+I)
             finalType = `複合類型 (${top1}+${top2})`; 
         }
 
         document.getElementById('final-type-text').innerText = finalType;
 
-        // 顯示結果區
         document.getElementById('result-area').style.display = 'block';
         document.getElementById('result-area').scrollIntoView({ behavior: 'smooth' });
-	
-	// === 傳送資料到 Google Sheets ===
+    
         const btn = document.getElementById('submitBtn');
         btn.innerText = "資料傳送中...";
         btn.disabled = true;
 
-        // 【重要】請把下面這行引號內的網址，換成你部署好的 Google Apps Script 網址
         const googleScriptUrl = "https://script.google.com/macros/s/AKfycbyLVoR7xrOTq_ccbXyT3Pl_JYRJqQGKOdHVIdE9GrXSaGl9UN_gNHwESY8lW4Vf1_IYGA/exec"; 
 
         const dataToSend = {
             role: userRole,
+            name: userName,
             id: userId,
             unit: userUnit,
             O: O, G: G, D: D, I: I,
@@ -437,7 +448,7 @@
 
         fetch(googleScriptUrl, {
             method: 'POST',
-            mode: 'no-cors', // 這是關鍵，讓瀏覽器允許跨域傳送
+            mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dataToSend)
         }).then(() => {
