@@ -170,13 +170,34 @@
             font-size: 0.95em;
             line-height: 1.6;
         }
-        .result-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 1.2em;
-            margin: 8px 0;
-            border-bottom: 1px dashed #ccc;
-            padding-bottom: 5px;
+
+        /* --- 新增：性格解釋區塊樣式 --- */
+        .desc-box {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-top: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .desc-box h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #28a745;
+            padding-bottom: 10px;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        .desc-box p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 15px;
+            text-align: justify; /* 讓文字對齊更整齊 */
+        }
+        .desc-highlight {
+            font-weight: bold;
+            color: #d35400; /* 強調文字顏色 */
         }
     </style>
 </head>
@@ -248,7 +269,8 @@
         【填答說明（請務必閱讀）】<br>
         • 每一題都包含 A 與 B 兩種不同描述<br>
         • 請只選擇一個選項，代表您較接近哪一種描述<br>
-        • 每題共有 4 個選項，請依「符合程度」選擇其一
+        • 每題共有 4 個選項，請依「符合程度」選擇其一<br>
+	• 本測驗結果並非能力或表現評價，僅建議作為臨床教學與學習調整之參考
     </p>
 
     <p style="color: #666; margin-bottom: 20px;">
@@ -277,11 +299,10 @@
             <strong>單位：</strong><span id="res-unit"></span>
         </div>
 
-        <div class="result-row"><span>O :</span> <span id="score-O">0</span></div>
-        <div class="result-row"><span>G :</span> <span id="score-G">0</span></div>
-        <div class="result-row"><span>D :</span> <span id="score-D">0</span></div>
-        <div class="result-row"><span>I :</span> <span id="score-I">0</span></div>
-        <p style="margin-top:20px; font-size: 0.9em; color: #555;">* 總分應為 54 分</p>
+        <div id="type-description-box" class="desc-box">
+            </div>
+
+        <p style="margin-top:20px; font-size: 0.9em; color: #555; text-align: center;">* 測驗結果已自動回傳至後台系統 *</p>
     </div>
 </div>
 
@@ -298,7 +319,7 @@
         { A: "我喜歡參與團體討論。", B: "我不喜歡參與團體討論" },
         { A: "我通常願意和別人共識，並在可能時提供協助。", B: "我通常喜歡獨立完成一項工作，即使是團隊的工作，我也希望自己完成自己的部分。" },
         { A: "我通常會問問題，或是試探性、委婉地發表意見。", B: "我通常會做出直接了當地陳述，或直接表達出我的意見。" },
-        { A: "我主要著重在生意、觀念及成果上。", B: "我主要著重在人、互動及感覺上。" },
+        { A: "我主要著重在主意、觀念及成果上。", B: "我主要著重在人、互動及感覺上。" },
         { A: "我使用手勢、臉部表情或抑揚頓挫，來強調我說話的重點。", B: "我不使用手勢、臉部表情或抑揚頓挫，來強調我說話的重點。" },
         { A: "我通常會接受別人的觀點（包括主意、感覺及顧慮）。", B: "我通常不會接受別人的觀點（包括主意、感覺及顧慮）。" },
         { A: "我通常只在審慎評估後及可預測的情況下，才會冒險及做出改變。", B: "我通常會在充滿活力及未知的狀況下，勇於冒險並做出改變。" },
@@ -307,6 +328,25 @@
         { A: "對別人提出的議題、興趣及關心的事物，我通常會有所反應。", B: "我只對自己的議題、興趣及關心的事物有興趣。" },
         { A: "我對別人和我之間人際關係的衝突反應，是緩慢而且不直接的。", B: "我對別人和我之間人際關係的衝突反應，是迅速而且直接的。" }
     ];
+
+    const typeContent = {
+        'D': `<h3>D 型（Dominance｜主導型）</h3>
+              <p>行動快速、目標明確，重視效率與成果，面對任務多主動承擔。</p>
+              <p><span class="desc-highlight">學習風格：</span>以實作與明確結論為佳。</p>
+              <p><span class="desc-highlight">教學建議：</span>指導宜直入重點、回饋具體，避免過度冗長說明。</p>`,
+        'I': `<h3>I 型（Influence｜影響型）</h3>
+              <p>熱情外向、樂於互動，容易在團隊中建立關係與氣氛。</p>
+              <p><span class="desc-highlight">學習風格：</span>動機來自鼓勵與肯定。</p>
+              <p><span class="desc-highlight">教學建議：</span>可多給正向回饋與討論機會，同時協助聚焦重點與完成細節。</p>`,
+        'S': `<h3>S 型（Steadiness｜穩定型）</h3>
+              <p>溫和穩定、配合度高，重視關係與團隊和諧。</p>
+              <p><span class="desc-highlight">學習風格：</span>需要安全感與熟悉流程。</p>
+              <p><span class="desc-highlight">教學建議：</span>宜循序漸進、清楚說明，避免臨時變動或高壓催促。</p>`,
+        'C': `<h3>C 型（Conscientiousness｜謹慎型）</h3>
+              <p>重視準確性與規範，做事謹慎、習慣先理解原則與流程。</p>
+              <p><span class="desc-highlight">學習風格：</span>偏好完整資訊與邏輯說明。</p>
+              <p><span class="desc-highlight">教學建議：</span>宜提供明確標準與時間，避免模糊指令。</p>`
+    };
 
     // --- 2. 初始化題目 ---
     const container = document.getElementById('questions-container');
