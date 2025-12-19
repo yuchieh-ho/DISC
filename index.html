@@ -53,9 +53,9 @@
             box-sizing: border-box;
         }
 
-        /* --- 題目區塊樣式調整 --- */
+        /* --- 題目區塊樣式 --- */
         .question-block {
-            margin-bottom: 30px; /* 增加間距 */
+            margin-bottom: 30px;
             padding-bottom: 20px;
             border-bottom: 1px solid #eee;
         }
@@ -64,19 +64,19 @@
             font-size: 1.1em;
             margin-bottom: 15px;
             color: #333;
-            background-color: #eaeaea; /* 標題加一點底色 */
+            background-color: #eaeaea;
             padding: 8px 12px;
             border-radius: 5px;
             display: inline-block;
         }
         
-        /* 新增：題目敘述區塊 (A與B的文字) */
+        /* 題目敘述區塊 */
         .question-description {
             background-color: #f8f9fa;
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 15px;
-            border-left: 5px solid #6c757d; /* 左側裝飾線 */
+            border-left: 5px solid #6c757d;
         }
         .desc-item {
             margin-bottom: 10px;
@@ -93,7 +93,7 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            padding-left: 10px; /* 稍微縮排 */
+            padding-left: 10px;
         }
         .option-label {
             display: flex;
@@ -105,12 +105,12 @@
             transition: background 0.2s;
         }
         .option-label:hover {
-            background-color: #f0f8ff; /* 滑鼠移過去變淡藍色 */
+            background-color: #f0f8ff;
             border-color: #b3d7ff;
         }
         .option-label input {
             margin-right: 15px;
-            transform: scale(1.2); /* 讓圈圈大一點比較好按 */
+            transform: scale(1.2);
         }
         
         .text-a { color: #d9534f; font-weight: bold; }
@@ -199,6 +199,7 @@
             font-weight: bold;
             color: #d35400; /* 強調文字顏色 */
         }
+
     </style>
 </head>
 <body>
@@ -208,7 +209,7 @@
     <p style="color: #666; margin-bottom: 20px;">
         親愛的臨床教師與新進護理師您好：<br>
         本性格測驗協助臨床教師與學員彼此了解在互動、溝通與學習上的性格傾向，作為未來教學與合作的參考依據。<br>
-	本測驗沒有對錯，也不做能力評價，請您依照第一直覺作答，選擇最符合您「平時真實狀況」的選項即可。
+        本測驗沒有對錯，也不做能力評價，請您依照第一直覺作答，選擇最符合您「平時真實狀況」的選項即可。
     </p>
 
     <div class="info-section">
@@ -269,8 +270,7 @@
         【填答說明（請務必閱讀）】<br>
         • 每一題都包含 A 與 B 兩種不同描述<br>
         • 請只選擇一個選項，代表您較接近哪一種描述<br>
-        • 每題共有 4 個選項，請依「符合程度」選擇其一<br>
-	• 本測驗結果並非能力或表現評價，僅建議作為臨床教學與學習調整之參考
+        • 每題共有 4 個選項，請依「符合程度」選擇其一
     </p>
 
     <p style="color: #666; margin-bottom: 20px;">
@@ -278,7 +278,8 @@
         • 完全符合 A：A 的描述非常符合我<br>
         • 比較符合 A：A 的描述大致符合我<br>
         • 完全符合 B：B 的描述非常符合我<br>
-        • 比較符合 B：B 的描述大致符合我
+        • 比較符合 B：B 的描述大致符合我<br>
+	• 若 A、B 皆不完全符合，請選擇「相對較接近」的一方
     </p>
     
     <form id="quizForm">
@@ -302,7 +303,7 @@
         <div id="type-description-box" class="desc-box">
             </div>
 
-        <p style="margin-top:20px; font-size: 0.9em; color: #555; text-align: center;">* 測驗結果已自動回傳至後台系統 *</p>
+        <p style="margin-top:20px; font-size: 0.9em; color: #555; text-align: center;">* 本測驗結果並非能力或表現評價，僅建議作為臨床教學與學習調整之參考 *</p>
     </div>
 </div>
 
@@ -319,7 +320,7 @@
         { A: "我喜歡參與團體討論。", B: "我不喜歡參與團體討論" },
         { A: "我通常願意和別人共識，並在可能時提供協助。", B: "我通常喜歡獨立完成一項工作，即使是團隊的工作，我也希望自己完成自己的部分。" },
         { A: "我通常會問問題，或是試探性、委婉地發表意見。", B: "我通常會做出直接了當地陳述，或直接表達出我的意見。" },
-        { A: "我主要著重在主意、觀念及成果上。", B: "我主要著重在人、互動及感覺上。" },
+        { A: "我主要著重在生意、觀念及成果上。", B: "我主要著重在人、互動及感覺上。" },
         { A: "我使用手勢、臉部表情或抑揚頓挫，來強調我說話的重點。", B: "我不使用手勢、臉部表情或抑揚頓挫，來強調我說話的重點。" },
         { A: "我通常會接受別人的觀點（包括主意、感覺及顧慮）。", B: "我通常不會接受別人的觀點（包括主意、感覺及顧慮）。" },
         { A: "我通常只在審慎評估後及可預測的情況下，才會冒險及做出改變。", B: "我通常會在充滿活力及未知的狀況下，勇於冒險並做出改變。" },
@@ -329,6 +330,7 @@
         { A: "我對別人和我之間人際關係的衝突反應，是緩慢而且不直接的。", B: "我對別人和我之間人際關係的衝突反應，是迅速而且直接的。" }
     ];
 
+    // --- 定義性格解釋文字 (確保文字正確) ---
     const typeContent = {
         'D': `<h3>D 型（Dominance｜主導型）</h3>
               <p>行動快速、目標明確，重視效率與成果，面對任務多主動承擔。</p>
@@ -353,32 +355,26 @@
 
     questions.forEach((q, index) => {
         const n = index + 1;
-        // 修改這裡的 HTML 結構，將敘述文字移到選項上方
         const html = `
             <div class="question-block">
                 <div class="question-title">第 ${n} 題</div>
-                
                 <div class="question-description">
                     <div class="desc-item"><span class="text-a">A：</span>${q.A}</div>
                     <div class="desc-item"><span class="text-b">B：</span>${q.B}</div>
                 </div>
-
                 <div class="options-container">
                     <label class="option-label">
                         <input type="radio" name="q${n}" value="3">
                         <div><span class="text-a">完全符合 A</span></div>
                     </label>
-
                     <label class="option-label">
                         <input type="radio" name="q${n}" value="2">
                         <div><span class="text-a">比較符合 A</span></div>
                     </label>
-
                     <label class="option-label">
                         <input type="radio" name="q${n}" value="1">
                         <div><span class="text-b">比較符合 B</span></div>
                     </label>
-
                     <label class="option-label">
                         <input type="radio" name="q${n}" value="0">
                         <div><span class="text-b">完全符合 B</span></div>
@@ -433,11 +429,7 @@
         document.getElementById('res-id').innerText = userId;
         document.getElementById('res-unit').innerText = userUnit;
 
-        document.getElementById('score-O').innerText = O;
-        document.getElementById('score-G').innerText = G;
-        document.getElementById('score-D').innerText = D;
-        document.getElementById('score-I').innerText = I;
-
+        // 計算最高分
         let scores = [
             { type: 'O', val: O },
             { type: 'G', val: G },
@@ -453,20 +445,36 @@
         const has = (type) => (top1 === type || top2 === type);
 
         let finalType = "";
+        let resultKey = ""; 
         
+        // 邏輯判定
         if (has('G') && has('D')) {
             finalType = "🐯 老虎 D 支配型";
+            resultKey = "D";
         } else if (has('O') && has('D')) {
             finalType = "🦚 孔雀 I 影響型";
+            resultKey = "I";
         } else if (has('O') && has('I')) {
             finalType = "🐨 無尾熊 S 穩健型";
+            resultKey = "S";
         } else if (has('G') && has('I')) {
             finalType = "🦉 貓頭鷹 C 分析型";
+            resultKey = "C";
         } else {
-            finalType = `複合類型 (${top1}+${top2})`; 
+            finalType = `複合類型`; 
+            resultKey = "MIX"; 
         }
 
         document.getElementById('final-type-text').innerText = finalType;
+
+        // --- 關鍵修改：只顯示對應的單一解釋 ---
+        const descBox = document.getElementById('type-description-box');
+        if (typeContent[resultKey]) {
+            descBox.innerHTML = typeContent[resultKey];
+        } else {
+            // 如果是複合型 (不在四大類中)，顯示提示訊息
+            descBox.innerHTML = "<p>您的測驗結果顯示您兼具多種特質，建議您可以同時參考前兩項高分特質的教學建議，或諮詢臨床教師。</p>";
+        }
 
         document.getElementById('result-area').style.display = 'block';
         document.getElementById('result-area').scrollIntoView({ behavior: 'smooth' });
@@ -493,11 +501,11 @@
             body: JSON.stringify(dataToSend)
         }).then(() => {
             btn.innerText = "結果已送出";
-            alert("測驗完成！結果已記錄。");
+            alert("測驗完成！");
         }).catch(err => {
             console.error(err);
             btn.innerText = "傳送失敗";
-            alert("結果顯示成功，但傳送至後台失敗，請截圖保存。");
+            alert("Error");
         });
     }
     
