@@ -485,20 +485,21 @@
 
         const googleScriptUrl = "https://script.google.com/macros/s/AKfycbyLVoR7xrOTq_ccbXyT3Pl_JYRJqQGKOdHVIdE9GrXSaGl9UN_gNHwESY8lW4Vf1_IYGA/exec"; 
 
-        const dataToSend = {
-            role: userRole,
-            name: userName,
-            id: userId,
-            unit: userUnit,
-            O: O, G: G, D: D, I: I,
-            finalType: finalType
-        };
+        const params = new URLSearchParams();
+        params.append('role', userRole);
+        params.append('name', userName);
+        params.append('id', userId);
+        params.append('unit', userUnit);
+        params.append('O', O);
+        params.append('G', G);
+        params.append('D', D);
+        params.append('I', I);
+        params.append('finalType', finalType);
 
         fetch(googleScriptUrl, {
             method: 'POST',
             mode: 'no-cors',
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify(dataToSend)
+            body: params
         }).then(() => {
             btn.innerText = "結果已送出";
             alert("測驗完成！");
